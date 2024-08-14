@@ -1,5 +1,5 @@
 {
-  "dependencies": {
-    "chrome-types": "^0.1.297"
-  }
+    "devDependencies": {
+        "chrome-types": "^0.1.297"
+    }
 }

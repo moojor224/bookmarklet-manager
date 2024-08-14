@@ -4,11 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' ">
     <title>Popup file</title>
+    <style>
+        html {
+            width: max-content;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Hello World</h1>
+    <table id="scripts"></table>
+    <button id="editor">New Script</button>
+    <script src="./sval.js"></script>
     <script src="./popup.js"></script>
 </body>
 

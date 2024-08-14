@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            background-color: #1e1e1e;
+        }
+
+        html,
+        body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            max-height: 100vh;
+        }
+
+        div.container {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 1fr;
+            height: 100%;
+        }
+
+        div.titlebar {
+            grid-row: 1 / span 1;
+            grid-column: 1 / span 1;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            box-sizing: border-box;
+            height: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        div.titlebar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        div.titlebar>ul {
+            list-style: none;
+            display: inline-flex;
+            margin: 0;
+            padding: 0;
+            gap: 10px;
+            margin-left: 10px;
+        }
+
+        div.titlebar>ul li:not(:last-child) {
+            border-bottom: 1px solid #444;
+        }
+
+        div.titlebar>ul li {
+            position: relative;
+            width: max-content;
+            padding: 0;
+            margin: 0;
+            display: block;
+            width: 100%;
+        }
+
+        div.titlebar>ul li>span {
+            padding: 10px;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+
+        div.titlebar>ul>li ul {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            color: white;
+            box-sizing: border-box;
+            border-radius: 5px;
+            z-index: 1;
+            width: max-content;
+        }
+
+
+        div.titlebar>ul li:hover {
+            background-color: #444;
+        }
+
+        div.titlebar>ul li:hover>ul {
+            display: block;
+            top: 0;
+            left: 100%;
+        }
+
+        div.titlebar>ul>li:hover>ul {
+            display: block;
+            top: 100%;
+            left: 0;
+        }
+
+
+        div#editor {
+            grid-row: 2 / span 1;
+            grid-column: 1 / span 1;
+            width: 100%;
+            height: calc(100vh - 40px);
+            border: 1px solid grey;
+            box-sizing: border-box;
+        }
+
+        div#toast {
+            display: none;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            padding: 10px;
+            background-color: #d3d3d360;
+            color: white;
+            border-radius: 18px;
+        }
+
+        div#toast.show {
+            display: block;
+            bottom: 100%;
+            animation: fadeinout 3s;
+        }
+
+        @keyframes fadeinout {
+            0% {
+                bottom: 10px;
+                display: none;
+            }
+
+            1% {
+                bottom: 10px;
+                opacity: 0;
+                display: block;
+            }
+
+            10% {
+                bottom: 10px;
+                opacity: 1;
+                display: block;
+            }
+
+            90% {
+                bottom: 10px;
+                opacity: 1;
+                display: block;
+            }
+
+            99% {
+                bottom: 10px;
+                opacity: 0;
+                display: block;
+            }
+
+            100% {
+                bottom: 100%;
+                display: none;
+            }
+        }
+
+        div#modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #00000080;
+            z-index: 100;
+        }
+
+        div#modal>div {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .disabled {
+            filter: brightness(0.6);
+            pointer-events: none;
+        }
+
+        li:has(>span.disabled) {
+            cursor: not-allowed !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="titlebar">
+            <strong class="bookmarklet-name">New Bookmarklet</strong>
+            <ul>
+                <li>
+                    <span>File</span>
+                    <ul>
+                        <li>
+                            <span id="newbtn">New</span>
+                        </li>
+                        <li>
+                            <span>Open</span>
+                            <ul id="openlist"></ul>
+                        </li>
+                        <li>
+                            <span id="savebtn">Save</span>
+                        </li>
+                        <li>
+                            <span id="renamebtn" class="disabled">Rename</span>
+                        </li>
+                        <li>
+                            <span id="deletebtn" class="disabled">Delete</span>
+                        </li>
+                        <li>
+                            <span id="exportbtn" class="disabled">Export</span>
+                        </li>
+                    </ul>
+                </li>
+                <!-- <li>
+                    <span>Edit</span>
+                    <ul></ul>
+                </li>
+                <li>
+                    <span>View</span>
+                    <ul></ul>
+                </li> -->
+            </ul>
+        </div>
+        <div id="editor"></div>
+    </div>
+    <div id="toast">message</div>
+    <div id="modal">
+        <div>
+            <h1>Export</h1>
+            <a href="" id="exporta"></a><span>&lt; Drag me to your bookmarks bar</span><br>
+            <button id="modalclose">Close</button>
+        </div>
+    </div>
+    <script src="./monaco/min/vs/loader.js"></script>
+    <script src="./editor.js"></script>
+</body>
+
+</html>
