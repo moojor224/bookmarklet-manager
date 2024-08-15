@@ -10,6 +10,7 @@ const toast = document.getElementById("toast");
 const exporta = document.getElementById("exporta");
 const modal = document.getElementById("modal");
 const modalclose = document.getElementById("modalclose");
+const dragCover = document.getElementById("dragcover");
 editorContainer.addEventListener("keydown", function (event) {
     if (event.key == "s" && event.ctrlKey) {
         event.preventDefault();
@@ -33,6 +34,31 @@ savebtn.addEventListener("click", save);
 deletebtn.addEventListener("click", deleteScript);
 renamebtn.addEventListener("click", rename);
 newbtn.addEventListener("click", newScript);
+document.body.addEventListener("dragover", function (event) {
+    event.preventDefault();
+    dragCover.classList.remove("hidden");
+});
+dragCover.addEventListener("dragleave", function (event) {
+    if (event.target == dragCover) dragCover.classList.add("hidden");
+});
+document.body.addEventListener("drop", function (event) {
+    event.preventDefault();
+    Array.from(event.dataTransfer.items).filter(e => e.type == "text/plain")[0].getAsString(function (text) {
+        if (text.match(/^javascript:/)) {
+            text = text.slice(11);
+            try {
+                text = decodeURIComponent(text); // decode bookmarklet if it's encoded
+            } catch (e) { }
+            window.model.pushEditOperations([], [{
+                range: window.model.getFullModelRange(),
+                text
+            }], null);
+        }
+    });
+    dragCover.classList.add("hidden");
+});
+
+
 let scriptId = null;
 let savedScripts = null;
 function unloadlistener(e) { e.preventDefault() }
