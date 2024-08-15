@@ -17,7 +17,7 @@ function bookmarklet(source, name, id) {
         chrome.tabs.query({ active: true, currentWindow: true }).then(([tab]) => {
             // console.log("current tab", tab);
             if (!tab) return;
-            // navigator.serviceWorker.getRegistration().then(reg => {
+            // navigator.serviceWorker.getRegistration().then(reg => { // new service worker method (no benefits vs straight execution)
             //     console.log("reg", reg);
             //     reg.active.postMessage({
             //         type: "run",
@@ -36,8 +36,7 @@ function bookmarklet(source, name, id) {
             }).catch(err => {
                 console.log("caught error executing bookmarklet", err);
             });
-            let worker = chrome.extension.getBackgroundPage();
-            // console.log("worker", worker);
+            // let worker = chrome.extension.getBackgroundPage(); // old service worker method
             // worker.postMessage({
             //     type: "run",
             //     data: {
