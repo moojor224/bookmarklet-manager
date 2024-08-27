@@ -20,10 +20,11 @@
         "bookmarks"
     ],
     "background": {
-        "service_worker": "background.js"
+        // "service_worker": "background.js"
         // "page": "background.html"
     },
     "content_security_policy": {
+        // "extension_pages": "script-src 'self'; script-src-elem chrome-extension:; object-src 'self';",
         "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self';"
     }
 }

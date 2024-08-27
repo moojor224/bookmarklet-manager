@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Editor</title>
     <style>
         html {
             background-color: #1e1e1e;
@@ -237,60 +237,17 @@
             border-radius: 5px;
         }
     </style>
+    <!-- <script src="./js/react.js"></script> -->
+    <script src="./js/react.production.min.js"></script>
+    <script src="./js/react.profiling.min.js"></script>
+    <script src="./js/react-dom.production.min.js"></script>
+    <!-- <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script> -->
 </head>
 
-<body>
-    <div class="container">
-        <div class="titlebar">
-            <strong class="bookmarklet-name">New Bookmarklet</strong>
-            <ul>
-                <li>
-                    <span>File</span>
-                    <ul>
-                        <li>
-                            <span id="newbtn">New</span>
-                        </li>
-                        <li>
-                            <span>Open</span>
-                            <ul id="openlist"></ul>
-                        </li>
-                        <li>
-                            <span id="savebtn">Save</span>
-                        </li>
-                        <li>
-                            <span id="renamebtn" class="disabled">Rename</span>
-                        </li>
-                        <li>
-                            <span id="deletebtn" class="disabled">Delete</span>
-                        </li>
-                        <li>
-                            <span id="exportbtn" class="disabled">Export</span>
-                        </li>
-                    </ul>
-                </li>
-                <!-- <li>
-                    <span>Edit</span>
-                    <ul></ul>
-                </li>
-                <li>
-                    <span>View</span>
-                    <ul></ul>
-                </li> -->
-            </ul>
-        </div>
-        <div id="editor"></div>
-    </div>
-    <div id="toast">message</div>
-    <div id="modal">
-        <div>
-            <h1>Export</h1>
-            <a href="" id="exporta"></a><span>&lt; Drag me to your bookmarks bar</span><br>
-            <button id="modalclose">Close</button>
-        </div>
-    </div>
-    <div id="dragcover" class="hidden"></div>
+<body id="root">
     <script src="./monaco/min/vs/loader.js"></script>
-    <script src="./editor.js"></script>
+    <script src="./editor.js" type="module"></script>
 </body>
 
 </html>
